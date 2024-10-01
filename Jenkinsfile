@@ -38,10 +38,13 @@ pipeline {
     stage('Analyse Sonarqube') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKENSONAR')]) {
           sh "mvn sonar:sonar \
   -Dsonar.projectKey=CyberOPS \
   -Dsonar.host.url=http://devsecops69.eastus.cloudapp.azure.com:9999 \
-  -Dsonar.login=db0fc9589d65952bfa86558f85fff030a1cecaf3"
+  -Dsonar.login=${TOKENSONAR}"
+          }
+          
         }
       }
   
