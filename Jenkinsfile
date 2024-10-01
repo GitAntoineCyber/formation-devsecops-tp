@@ -34,6 +34,21 @@ pipeline {
          }
        }
     }
+    //--------------------------
+    stage('Analyse Sonarqube') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh "mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=CyberOPS \
+  -Dsonar.projectName='CyberOPS' \
+  -Dsonar.host.url=http://devsecops69.eastus.cloudapp.azure.com:9000 \
+  -Dsonar.token=sqp_f031552b22d6cf10fcfb41f19ca15b15aa2fd1fc
+"
+        }
+      }
+  
+    }
+//--------------------------
 //--------------------------
 
     //--------------------------
