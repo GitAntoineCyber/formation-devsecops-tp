@@ -38,11 +38,10 @@ pipeline {
     stage('Analyse Sonarqube') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh "mvn clean verify sonar:sonar \
+          sh "mvn sonar:sonar \
   -Dsonar.projectKey=CyberOPS \
-  -Dsonar.projectName='CyberOPS' \
-  -Dsonar.host.url=http://devsecops69.eastus.cloudapp.azure.com:9000 \
-  -Dsonar.token=sqp_f031552b22d6cf10fcfb41f19ca15b15aa2fd1fc"
+  -Dsonar.host.url=http://devsecops69.eastus.cloudapp.azure.com:9999 \
+  -Dsonar.login=db0fc9589d65952bfa86558f85fff030a1cecaf3"
         }
       }
   
