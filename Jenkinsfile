@@ -40,7 +40,7 @@ pipeline {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKENSONAR')]) {
           sh "mvn sonar:sonar \
-  -Dsonar.projectKey=CyberOPS \
+  -Dsonar.projectKey=Cyber\
   -Dsonar.host.url=http://devsecops69.eastus.cloudapp.azure.com:9999 \
   -Dsonar.login=${TOKENSONAR}"
           }
