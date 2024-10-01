@@ -3,7 +3,7 @@
 ## Fork and Clone this Repo
 
 ## Clone to Desktop and VM
-ok
+Test
 ## NodeJS Microservice - Docker Image -
 `docker run -p 8787:5000 hrefnhaila/node-service:v1`
 
