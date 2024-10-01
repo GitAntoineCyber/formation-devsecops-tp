@@ -63,7 +63,18 @@ pipeline {
        }
 }
 //--------------------------
-
-    //--------------------------
+//--------------------------
+    stage('Docker Build and Push') {
+      steps {
+        withCredentials([string(credentialsId: '001', variable: 'DOCKER_HUB_PASSWORD')]) {
+          sh 'sudo docker login -u antoinecyberdocker -p $DOCKER_HUB_PASSWORD'
+          sh 'printenv'
+          sh 'sudo docker build -t antoinecyberdocker/devops-app:""$GIT_COMMIT"" .'
+          sh 'sudo docker push antoinecyberdocker/devops-app:""$GIT_COMMIT""'
+        }
+ 
+      }
+    }
+//--------------------------
     }
 }
