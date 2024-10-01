@@ -76,5 +76,13 @@ pipeline {
       }
     }
 //--------------------------
+	    stage('Deployment Kubernetes  ') {
+      steps {
+        withKubeConfig([credentialsId: '002']) {
+              sh "sed -i 's#replace#hrefnhaila/devops-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+              sh 'kubectl apply -f k8s_deployment_service.yaml'
+        }
+      }
+    }
     }
 }
