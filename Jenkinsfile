@@ -119,6 +119,7 @@ pipeline {
 		catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
                 // Exécutez le script de scan
                 sh 'bash ./zap.sh' 
+		archive 'owasp-zap-report/*.html'
             }
         }
 //--------------------------
