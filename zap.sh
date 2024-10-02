@@ -15,16 +15,16 @@ exit_code=$?
 
 echo $exit_code
 # HTML Report
-sudo mkdir -p owasp-zap-report
-sudo mv zap_report.html owasp-zap-report
+sudo mkdir -p owasp-zap-report2
+sudo mv zap_report.html owasp-zap-report2
 
 
 echo "Exit Code : $exit_code"
 
  if [[ ${exit_code} -ne 0 ]];  then
     echo "OWASP ZAP Report has either Low/Medium/High Risk. Please check the HTML Report"
-     docker stop zap-report-server
-     docker run -d --rm --name zap-report-server -p 8888:80 -v $(pwd)/owasp-zap-report:/usr/share/nginx/html nginx
+     docker stop zap-report-server2 
+     docker run -d --rm --name zap-report-server2 -p 8888:80 -v $(pwd)/owasp-zap-report2:/usr/share/nginx/html nginx
     exit 1;
    else
     echo "OWASP ZAP did not report any Risk"
