@@ -6,7 +6,7 @@ echo $dockerImageName
  
 #docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
  
-echo "docker run --rm -v $WORKSPACE:/root/.cache/  -e TRIVY_GITHUB_TOKEN='token_github' aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName"
+ docker run --rm -v .:/root/.cache/  -e TRIVY_GITHUB_TOKEN='token_github' aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
  
     # Trivy scan result processing
     exit_code=$?
