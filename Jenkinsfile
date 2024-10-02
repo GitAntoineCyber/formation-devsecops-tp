@@ -119,7 +119,7 @@ pipeline {
                 echo 'Running OWASP ZAP...'
                 // Commande pour exécuter OWASP ZAP en mode CLI
                 sh '''
-                docker run -v $(pwd):/zap/wrk/ -t owasp/zap2docker-stable zap-baseline.py -t http://tonapplication:port -r zap_report.html
+                docker run -v $(pwd):/zap/wrk/ -t owasp/zap-stable zap-baseline.py -t http://tonapplication:port -r zap_report.html
                 '''
             }
         }
