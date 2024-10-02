@@ -114,26 +114,25 @@ pipeline {
       }
     }
 //--------------------------
-	stage('Run OWASP ZAP') {
+	 stage('Scan API with OWASP ZAP') {
             steps {
-                echo 'Running OWASP ZAP...'
-                // Commande pour exécuter OWASP ZAP en mode CLI
-                sh '''
-                docker run -v $(pwd):/zap/wrk/ -t owasp/zap-stable zap-baseline.py -t http://tonapplication:port -r zap_report.html
-                '''
+                // Exécutez le script de scan
+                sh 'bash ./zap.sh' 
             }
         }
 //--------------------------
-	stage('Publish ZAP Report') {
+        stage('Report Handling') {
             steps {
-                echo 'Publishing ZAP Report...'
-                publishHTML (target: [
-                    allowMissing: false,
-                    keepAll: true,
-                    reportDir: '.',
-                    reportFiles: 'zap_report.html',
-                    reportName: 'OWASP ZAP Report'
-                ])
+                // Gérer les rapports générés
+                script {
+                    def exitCode = sh(script: 'cat owasp-zap-report/zap_report.html', returnStatus: true)
+                    if (exitCode != 0) {
+                        echo "OWASP ZAP Report has either Low/Medium/High Risk. Please check the HTML Report"
+                        currentBuild.result = 'FAILURE'
+                    } else {
+                        echo "OWASP ZAP did not report any Risk"
+                    }
+                }
             }
         }
 //--------------------------
