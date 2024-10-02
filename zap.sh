@@ -5,7 +5,7 @@ PORT=30180
 # first run this
 chmod 777 $(pwd)
 echo $(id -u):$(id -g)
- docker run -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-api-scan.py -t http://devsecops69.eastus.cloudapp.azure.com:30802/v3/api-docs -f openapi -r zap_report.html
+ docker run -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-api-scan.py -t http://devsecops69.eastus.cloudapp.azure.com:9999/v3/api-docs -f openapi -r zap_report.html
 
 
 # comment above cmd and uncomment below lines to run with CUSTOM RULES
