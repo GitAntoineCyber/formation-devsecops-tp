@@ -88,15 +88,6 @@ pipeline {
 	       
 }
 //--------------------------
-	    stage('Deployment Kubernetes  ') {
-      steps {
-        withKubeConfig([credentialsId: '002']) {
-              sh "sed -i 's#replace#antoinecyberdocker/devops-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
-              sh 'kubectl apply -f k8s_deployment_service.yaml'
-        }
-      }
-    }
-//--------------------------
 	  stage('Vulnerability Scan - Kubernetes') {
       steps {
         parallel(
@@ -111,6 +102,16 @@ pipeline {
           }
 
         )
+      }
+    }
+//--------------------------
+//--------------------------
+	    stage('Deployment Kubernetes  ') {
+      steps {
+        withKubeConfig([credentialsId: '002']) {
+              sh "sed -i 's#replace#antoinecyberdocker/devops-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+              sh 'kubectl apply -f k8s_deployment_service.yaml'
+        }
       }
     }
 //--------------------------
