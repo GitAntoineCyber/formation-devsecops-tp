@@ -23,6 +23,7 @@ echo "Exit Code : $exit_code"
 
  if [[ ${exit_code} -ne 0 ]];  then
     echo "OWASP ZAP Report has either Low/Medium/High Risk. Please check the HTML Report"
+     docker run -d --rm --name zap-report-server -p 8888:80 -v $(pwd)/owasp-zap-report:/usr/share/nginx/html nginx
     exit 1;
    else
     echo "OWASP ZAP did not report any Risk"
