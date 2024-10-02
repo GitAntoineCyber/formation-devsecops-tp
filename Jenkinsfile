@@ -82,11 +82,11 @@ pipeline {
 			 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                  sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"
                  sh "sudo bash trivy-image-scan.sh"
-	       }
 		}
-    		}
+	   }
+    	}
 	       
-       }
+}
 //--------------------------
 	    stage('Deployment Kubernetes  ') {
       steps {
