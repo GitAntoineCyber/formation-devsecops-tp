@@ -84,6 +84,8 @@ pipeline {
                  sh "sudo bash trivy-image-scan.sh"
 	       }
 		}
+    		}
+	       
        }
 //--------------------------
 	    stage('Deployment Kubernetes  ') {
@@ -93,6 +95,5 @@ pipeline {
               sh 'kubectl apply -f k8s_deployment_service.yaml'
         }
       }
-    }
     }
 }
