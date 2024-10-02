@@ -105,7 +105,6 @@ pipeline {
       }
     }
 //--------------------------
-//--------------------------
 	    stage('Deployment Kubernetes  ') {
       steps {
         withKubeConfig([credentialsId: '002']) {
@@ -115,5 +114,29 @@ pipeline {
       }
     }
 //--------------------------
+	stage('Run OWASP ZAP') {
+            steps {
+                echo 'Running OWASP ZAP...'
+                // Commande pour exécuter OWASP ZAP en mode CLI
+                sh '''
+                docker run -v $(pwd):/zap/wrk/ -t owasp/zap2docker-stable zap-baseline.py -t http://tonapplication:port -r zap_report.html
+                '''
+            }
+        }
+//--------------------------
+	stage('Publish ZAP Report') {
+            steps {
+                echo 'Publishing ZAP Report...'
+                publishHTML (target: [
+                    allowMissing: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'zap_report.html',
+                    reportName: 'OWASP ZAP Report'
+                ])
+            }
+        }
+//--------------------------
+    }
 }
-}
+
