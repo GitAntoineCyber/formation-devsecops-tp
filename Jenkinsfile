@@ -139,5 +139,55 @@ pipeline {
             }
         }
 //--------------------------
+	  @Library('slack') _
+
+pipeline {
+    agent any
+
+    environment {
+        SLACK_CHANNEL = 'teamDevsecops' // Slack channel to send notifications
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    sendNotification('STARTED')
+                }
+                // Your build steps here
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Your test steps here
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Your deployment steps here
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                sendNotification('SUCCESS')
+            }
+        }
+        failure {
+            script {
+                sendNotification('FAILURE')
+            }
+        }
+        unstable {
+            script {
+                sendNotification('UNSTABLE')
+            }
+        }
+    }
+}
     }
 }
