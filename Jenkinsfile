@@ -143,39 +143,7 @@ pipeline {
             }
         }
   }
-}
-//--------------------------
-
-
-pipeline {
-    agent any
-
-  
-
-    stages {
-        stage('Build') {
-            steps {
-                script {
-                    sendNotification('STARTED')
-                }
-                // Your build steps here
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Your test steps here
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Your deployment steps here
-            }
-        }
-    }
-
-    post {
+	post {
         success {
             script {
                 sendNotification('SUCCESS')
@@ -193,5 +161,8 @@ pipeline {
         }
     }
 }
+//--------------------------
+
+
 //--------------------------
   
