@@ -4,7 +4,6 @@ pipeline {
 	environment {
         SLACK_CHANNEL = 'tpdevsec' // Slack channel to send notifications
     }
-
   stages {
       stage('Build Artifact') {
             steps {
@@ -142,6 +141,15 @@ pipeline {
                 }
             }
         }
+	  //--------------------------
+	   stage('Test Slack Notification') {
+      steps {
+        script {
+          // Sending a simple message to Slack
+          slackSend(channel: "#${SLACK_CHANNEL}", message: 'Test Message from Jenkins', color: '#36A64F')
+        }
+      }
+    }
   }
 	post {
         success {
