@@ -2,7 +2,7 @@
 pipeline {
   agent any   
 	environment {
-        SLACK_CHANNEL = 'teamDevsecops' // Slack channel to send notifications
+        SLACK_CHANNEL = 'tpdevsec' // Slack channel to send notifications
     }
 
   stages {
