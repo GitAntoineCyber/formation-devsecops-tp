@@ -1,5 +1,9 @@
+@Library('Slack') _
 pipeline {
-  agent any
+  agent any   
+	environment {
+        SLACK_CHANNEL = 'teamDevsecops' // Slack channel to send notifications
+    }
 
   stages {
       stage('Build Artifact') {
@@ -141,14 +145,12 @@ pipeline {
   }
 }
 //--------------------------
-@Library('slack') _
+
 
 pipeline {
     agent any
 
-    environment {
-        SLACK_CHANNEL = 'teamDevsecops' // Slack channel to send notifications
-    }
+  
 
     stages {
         stage('Build') {
