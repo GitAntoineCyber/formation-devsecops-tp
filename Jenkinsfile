@@ -123,7 +123,7 @@ pipeline {
                 // Exécutez le script de scan
                 sh 'bash ./zap.sh' 
 		archive 'owasp-zap-report/*.html'
-}
+		}
             }
         }
 //--------------------------
@@ -141,7 +141,7 @@ pipeline {
                 }
             }
         }
-	  //--------------------------
+//--------------------------
 	   stage('Test Slack Notification') {
       steps {
         script {
@@ -150,6 +150,7 @@ pipeline {
         }
       }
     }
+//--------------------------
   }
 	post {
         success {
